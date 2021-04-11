@@ -2,6 +2,8 @@ var vidcapture, ctracker, drawcanvas;
 
 var w;
 var h;
+var r;
+var g;
 
 
 function setup() {
@@ -23,7 +25,16 @@ function setup() {
     w = vidcapture.width;
     h = vidcapture.height;
 
+    //    var a = random(0, 255);
+    //    var b = random(0, 255);
+    //    var c = random(0, 255);
+    //    fill(a, b, c);
+
+    //    fill(r, g, random(255));
+
 }
+
+
 
 
 
@@ -57,12 +68,21 @@ function draw() {
         //            c = 0;
         //        }
 
-        var r = map(position[19][1], 200, 210, 0, random(255));
+        //        var up1 = position[19][1] += 210;
+        //        var down1 = position[19][1] -= 190;
+        //
+        //        var up2 = position[22][1] + 210;
+        //        var down2 = position[22][1] - 190;
 
-        var g = map(position[22][1],
-            200, 210, 0, random(255));
+
+
+        r = map(position[19][1], 210, 180, 0, random(255));
+
+        g = map(position[22][1],
+            210, 180, 0, random(255));
 
         fill(r, g, 255);
+
 
         beginShape();
         vertex(position[19][0], position[19][1])
