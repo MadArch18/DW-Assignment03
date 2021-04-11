@@ -1,10 +1,8 @@
 var vidcapture, ctracker, drawcanvas;
 
-let food;
-let w;
-let h;
-let x = floor(random(w));
-let y = floor(random(h));
+var w;
+var h;
+
 
 function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
@@ -22,16 +20,12 @@ function setup() {
     //just for testing
     drawcanvas = document.getElementById('defaultCanvas0');
 
-
-    w = floor(vidcapture.width);
-    h = floor(vidcapture.height);
-    foodLocation();
+    w = vidcapture.width;
+    h = vidcapture.height;
 
 }
 
-function foodLocation() {
-    food = createVector(x, y);
-}
+
 
 function draw() {
 
@@ -41,9 +35,8 @@ function draw() {
 
     image(vidcapture, 0, 0);
 
-    fill(255, 0, 0);
-    noStroke();
-    ellipse(food.x, food.y, 20);
+    c = color(random(255), random(255), random(255));
+
 
     var position = ctracker.getCurrentPosition();
 
@@ -54,32 +47,60 @@ function draw() {
         //        position.forEach(function (pos) {
         //            ellipse(pos[0], pos[1], 2);
         //        })
-        var r = map(position[62][0], w, h, 0, 255);
-        var g = map(position[62][1], w, h, 0, 255, true);
+        //        var r = map(position[62][0], w, h, 0, 255);
+        //        var g = map(position[62][1], w, h, 0, 255, true);
 
+        //        if (position[19][1] <= position[19][1] + 20) {
+        //            c = color(random(255), random(255), random(255));
+        //
+        //        } else {
+        //            c = 0;
+        //        }
+
+        var r = map(position[19][1], 200, 210, 0, random(255));
+
+        var g = map(position[22][1],
+            200, 210, 0, random(255));
 
         fill(r, g, 255);
 
         beginShape();
-        vertex(position[44][0], position[44][1])
-        vertex(position[61][0], position[61][1])
-        vertex(position[60][0], position[60][1])
-        vertex(position[59][0], position[59][1])
-        vertex(position[50][0], position[50][1])
-        vertex(position[58][0], position[58][1])
-        vertex(position[57][0], position[57][1])
-        vertex(position[56][0], position[56][1])
+        vertex(position[19][0], position[19][1])
+        vertex(position[20][0], position[20][1])
+        vertex(position[21][0], position[21][1])
+        vertex(position[22][0], position[22][1])
+        vertex(position[22][0], position[22][1] + 5)
+        vertex(position[21][0], position[21][1] + 5)
+        vertex(position[20][0], position[20][1] + 5)
+        vertex(position[19][0], position[19][1] + 5)
+        endShape();
+
+        beginShape();
+        vertex(position[15][0], position[15][1])
+        vertex(position[16][0], position[16][1])
+        vertex(position[17][0], position[17][1])
+        vertex(position[18][0], position[18][1])
+        vertex(position[18][0], position[18][1] + 5)
+        vertex(position[17][0], position[17][1] + 5)
+        vertex(position[16][0], position[16][1] + 5)
+        vertex(position[15][0], position[15][1] + 5)
         endShape();
 
 
-        if (position[food.x], position[food.y]) {
-            foodLocation();
-        }
 
-        console.log("this is " + position[20][0])
+
+        console.log("eyebrow left corner " + position[19][1])
         //positions fun in here
         //for each loops all
     }
+
+    //    function changeColor() {
+    //
+    //        var x = map(position[19][1], 0, h, 180, 220, true);
+    //
+    //
+    //        
+    //    }
 
 
 
