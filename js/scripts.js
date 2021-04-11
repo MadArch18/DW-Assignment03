@@ -2,8 +2,7 @@ var vidcapture, ctracker, drawcanvas;
 
 var w;
 var h;
-var r;
-var g;
+let c = 0;
 
 
 function setup() {
@@ -39,14 +38,26 @@ function setup() {
 
 
 function draw() {
-
+    background(255);
     //    background(255, 5);
     translate(vidcapture.width, 0);
     scale(-1, 1);
 
     image(vidcapture, 0, 0);
 
-    c = color(random(255), random(255), random(255));
+    stroke(255);
+
+    c = color(255, 204, 0);
+    fill(c);
+    rect(50, 170, 25, 25);
+
+    c = color(150, 35, 255);
+    fill(c);
+    rect(100, 170, 25, 25);
+
+    c = color(255, 90, 150);
+    fill(c);
+    rect(150, 170, 25, 25);
 
 
     var position = ctracker.getCurrentPosition();
@@ -54,19 +65,53 @@ function draw() {
     if (position) {
         ctracker.draw(drawcanvas);
 
+
+        if (position[19][1] <= 200 && position[19][0] >= 250) {
+            console.log("this eyebrow is moving here" + position[19][0]);
+            c = color(255, 255, 0);
+            fill(c);
+
+            beginShape();
+            vertex(position[15][0], position[15][1])
+            vertex(position[16][0], position[16][1])
+            vertex(position[17][0], position[17][1])
+            vertex(position[18][0], position[18][1])
+            vertex(position[18][0], position[18][1] + 5)
+            vertex(position[17][0], position[17][1] + 5)
+            vertex(position[16][0], position[16][1] + 5)
+            vertex(position[15][0], position[15][1] + 5)
+            endShape();
+        }
+
+        if (position[15][1] <= 200 && position[15][0] <= 350) {
+            c = color(255, 0, 255);
+            fill(c);
+            
+            
+
+            beginShape();
+            vertex(position[19][0], position[19][1])
+            vertex(position[20][0], position[20][1])
+            vertex(position[21][0], position[21][1])
+            vertex(position[22][0], position[22][1])
+            vertex(position[22][0], position[22][1] + 5)
+            vertex(position[21][0], position[21][1] + 5)
+            vertex(position[20][0], position[20][1] + 5)
+            vertex(position[19][0], position[19][1] + 5)
+            endShape();
+        }
+
+        //        position.forEach(function (pos) {
+        //            line(pos[0], pos[1], mouseX, mouseY);
+        //        })
+
+
+
         //        fill(0);
         //        position.forEach(function (pos) {
         //            ellipse(pos[0], pos[1], 2);
         //        })
-        //        var r = map(position[62][0], w, h, 0, 255);
-        //        var g = map(position[62][1], w, h, 0, 255, true);
 
-        //        if (position[19][1] <= position[19][1] + 20) {
-        //            c = color(random(255), random(255), random(255));
-        //
-        //        } else {
-        //            c = 0;
-        //        }
 
         //        var up1 = position[19][1] += 210;
         //        var down1 = position[19][1] -= 190;
@@ -74,45 +119,32 @@ function draw() {
         //        var up2 = position[22][1] + 210;
         //        var down2 = position[22][1] - 190;
 
+        //        if (mouseIsPressed && mouseX < 555 && mouseX > 525 && mouseY < 170 && mouseY > 195) {
+        //            c = get(mouseX, mouseY);
+        //            fill(c);
+        //        }
+        //
+        //        r = map(position[19][1], 200, 150, 250, 255);
+        //
+        //        g = map(position[22][1],
+        //            200, 150, 0, random(255));
+        //
+        //        if (mouseIsPressed) {
+        //            c = color(get(mouseX, mouseY));
+        //            fill(c);
+        //
+        //
 
 
-        r = map(position[19][1], 210, 180, 0, random(255));
-
-        g = map(position[22][1],
-            210, 180, 0, random(255));
-
-        fill(r, g, 255);
-
-
-        beginShape();
-        vertex(position[19][0], position[19][1])
-        vertex(position[20][0], position[20][1])
-        vertex(position[21][0], position[21][1])
-        vertex(position[22][0], position[22][1])
-        vertex(position[22][0], position[22][1] + 5)
-        vertex(position[21][0], position[21][1] + 5)
-        vertex(position[20][0], position[20][1] + 5)
-        vertex(position[19][0], position[19][1] + 5)
-        endShape();
-
-        beginShape();
-        vertex(position[15][0], position[15][1])
-        vertex(position[16][0], position[16][1])
-        vertex(position[17][0], position[17][1])
-        vertex(position[18][0], position[18][1])
-        vertex(position[18][0], position[18][1] + 5)
-        vertex(position[17][0], position[17][1] + 5)
-        vertex(position[16][0], position[16][1] + 5)
-        vertex(position[15][0], position[15][1] + 5)
-        endShape();
-
-
-
-
-        console.log("eyebrow left corner " + position[19][1])
+        //
+        //
+        //        }
+        //
+        //        console.log("eyebrow left corner " + position[19][1])
         //positions fun in here
         //for each loops all
     }
+
 
     //    function changeColor() {
     //
