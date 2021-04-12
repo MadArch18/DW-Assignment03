@@ -2,12 +2,14 @@ var vidcapture, ctracker, drawcanvas;
 
 var w;
 var h;
-let c = 0;
+var c;
+
 
 
 function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.parent("p5canvas");
+
 
     //p5 method for creating a video stream
     vidcapture = createCapture(VIDEO);
@@ -24,13 +26,6 @@ function setup() {
     w = vidcapture.width;
     h = vidcapture.height;
 
-    //    var a = random(0, 255);
-    //    var b = random(0, 255);
-    //    var c = random(0, 255);
-    //    fill(a, b, c);
-
-    //    fill(r, g, random(255));
-
 }
 
 
@@ -38,36 +33,42 @@ function setup() {
 
 
 function draw() {
-    background(255);
-    //    background(255, 5);
+    background(50);
+
+    var r = map(mouseX, vidcapture.width, vidcapture.height, 0, 255);
+    var g = map(mouseY, vidcapture.width, vidcapture.height, 0, 255);
+
+    //dots background: https://editor.p5js.org/cdaein/sketches/SJiQ8MXhZ
+
+
+    for (var i = 0; i <= vidcapture.width; i += 20) {
+        for (var j = 0; j <= vidcapture.height; j += 20) {
+            var d = dist(mouseX, mouseY, i, j);
+            d = map(d, 0, 600, 20, 0);
+            fill(r, g, random(255));
+            ellipse(i, j, d, d);
+        }
+    }
+
     translate(vidcapture.width, 0);
     scale(-1, 1);
 
-    image(vidcapture, 0, 0);
 
-    stroke(255);
-
-    c = color(255, 204, 0);
-    fill(c);
-    rect(50, 170, 25, 25);
-
-    c = color(150, 35, 255);
-    fill(c);
-    rect(100, 170, 25, 25);
-
-    c = color(255, 90, 150);
-    fill(c);
-    rect(150, 170, 25, 25);
+    line(0, vidcapture.height / 2, vidcapture.width, vidcapture.height / 2);
+    line(vidcapture.width / 2, 0, vidcapture.width / 2, vidcapture.height);
 
 
     var position = ctracker.getCurrentPosition();
 
+
+
+
+
     if (position) {
-        ctracker.draw(drawcanvas);
+        stroke(0);
 
 
-        if (position[19][1] <= 200 && position[19][0] >= 250) {
-            console.log("this eyebrow is moving here" + position[19][0]);
+        if (position[19][1] <= 200 && position[19][0] >= 230) {
             c = color(255, 255, 0);
             fill(c);
 
@@ -83,11 +84,9 @@ function draw() {
             endShape();
         }
 
-        if (position[15][1] <= 200 && position[15][0] <= 350) {
+        if (position[15][1] <= 200 && position[15][0] <= 370) {
             c = color(255, 0, 255);
             fill(c);
-            
-            
 
             beginShape();
             vertex(position[19][0], position[19][1])
@@ -101,66 +100,55 @@ function draw() {
             endShape();
         }
 
-        //        position.forEach(function (pos) {
-        //            line(pos[0], pos[1], mouseX, mouseY);
-        //        })
+        if (position[50][1] >= vidcapture.height / 2, position[50][0] >= 300) {
+            c = color(0, 160, 160);
+            fill(c);
+
+            beginShape();
+            vertex(position[44][0], position[44][1])
+            vertex(position[61][0], position[61][1])
+            vertex(position[60][0], position[60][1])
+            vertex(position[59][0], position[59][1])
+            vertex(position[50][0], position[50][1])
+            vertex(position[49][0], position[49][1])
+            vertex(position[48][0], position[48][1])
+            vertex(position[47][0], position[47][1])
+            vertex(position[46][0], position[46][1])
+            vertex(position[45][0], position[45][1])
+            endShape();
+
+        }
+        if (position[44][1] >= vidcapture.height / 2, position[44][0] <= 300) {
+            c = color(200, 0, 200);
+            fill(c);
+
+            beginShape();
+            vertex(position[44][0], position[44][1])
+            vertex(position[56][0], position[56][1])
+            vertex(position[57][0], position[57][1])
+            vertex(position[58][0], position[58][1])
+            vertex(position[50][0], position[50][1])
+            vertex(position[51][0], position[51][1])
+            vertex(position[52][0], position[52][1])
+            vertex(position[53][0], position[53][1])
+            vertex(position[54][0], position[54][1])
+            vertex(position[55][0], position[55][1])
+            endShape();
 
 
 
-        //        fill(0);
-        //        position.forEach(function (pos) {
-        //            ellipse(pos[0], pos[1], 2);
-        //        })
+
+        }
+        c = color(70, 200, 50);
+        fill(c);
+        beginShape();
+        vertex(position[62][0], position[62][1])
+        vertex(position[43][0], position[43][1])
+        vertex(position[37][0], position[37][1])
+        vertex(position[42][0], position[42][1])
+
+        endShape();
 
 
-        //        var up1 = position[19][1] += 210;
-        //        var down1 = position[19][1] -= 190;
-        //
-        //        var up2 = position[22][1] + 210;
-        //        var down2 = position[22][1] - 190;
 
-        //        if (mouseIsPressed && mouseX < 555 && mouseX > 525 && mouseY < 170 && mouseY > 195) {
-        //            c = get(mouseX, mouseY);
-        //            fill(c);
-        //        }
-        //
-        //        r = map(position[19][1], 200, 150, 250, 255);
-        //
-        //        g = map(position[22][1],
-        //            200, 150, 0, random(255));
-        //
-        //        if (mouseIsPressed) {
-        //            c = color(get(mouseX, mouseY));
-        //            fill(c);
-        //
-        //
-
-
-        //
-        //
-        //        }
-        //
-        //        console.log("eyebrow left corner " + position[19][1])
-        //positions fun in here
-        //for each loops all
     }
-
-
-    //    function changeColor() {
-    //
-    //        var x = map(position[19][1], 0, h, 180, 220, true);
-    //
-    //
-    //        
-    //    }
-
-
-
-
-    //https://p5js.org/reference/#/p5/beginShape
-    //https://editor.p5js.org/codingtrain/sketches/HkDVpSvDm
-
-
-
-
-}
